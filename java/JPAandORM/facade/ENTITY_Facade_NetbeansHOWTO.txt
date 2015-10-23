@@ -1,0 +1,9 @@
+Facade how to:
+1. Netbeans: create new class in package 'facades' call it 'PersonFacade' for example (exchange Person with the Entity object name you need)
+2. Netbeans: delete all lines in the file
+3. open ENTITY_Facade in a text editor and copy all content (ctrl + a)
+4. Netbeans: paste (ctrl + v) the content into PersonFacade.java
+5. Netbeans: press ctrl + h (replace) and replace all 'ENTITY_' with 'Person' and AGAIN replace all 'entity_' with 'person'
+6. Netbeans: go to line 84 to 87 and REMEMBER to ADJUST the ATTRIBUTES that should be copied according to YOUR entity class
+
+You should now have a working simple CRUD Facade 
