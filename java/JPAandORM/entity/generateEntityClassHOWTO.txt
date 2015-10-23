@@ -1,0 +1,6 @@
+In command prompt: 1: chmod +x generateEntityClass.sh
+		   2: ./generateEntityClass.sh 
+
+			(provide the correct input and the class will be created and located in scriptResults directory) 
+
+			NB! No ERROR checking - so you must provide sane input (programmers only - lol) 
