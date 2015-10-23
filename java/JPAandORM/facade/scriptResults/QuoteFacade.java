@@ -5,13 +5,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-import entities.ENTITY_;
+import entities.Quote;
 
-public class ENTITY_Facade {
+public class QuoteFacade {
 
     private EntityManagerFactory emf;
 
-    public ENTITY_Facade(EntityManagerFactory emf) {
+    public QuoteFacade(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
@@ -19,7 +19,7 @@ public class ENTITY_Facade {
         return emf.createEntityManager();
     }
 
-    public ENTITY_ addENTITY_(ENTITY_ x) {
+    public Quote addQuote(Quote x) {
         EntityManager em = getEntityManager();
 
         try {
@@ -32,72 +32,72 @@ public class ENTITY_Facade {
         return x;
     }
 
-    public ENTITY_ deleteENTITY_(int id) {
+    public Quote deleteQuote(int id) {
         EntityManager em = getEntityManager();
 
-        ENTITY_ entity_ToDelete = em.find(ENTITY_.class, id);
+        Quote quoteToDelete = em.find(Quote.class, id);
 
         // Use the entity manager  
         try {
             em.getTransaction().begin();
-            em.remove(entity_ToDelete);
+            em.remove(quoteToDelete);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
-        return entity_ToDelete;
+        return quoteToDelete;
     }
 
-    public ENTITY_ getENTITY_(int id) {
+    public Quote getQuote(int id) {
 
 	EntityManager em = getEntityManager();
 
-        ENTITY_ entity_ToGet = em.find(ENTITY_.class, id);
+        Quote quoteToGet = em.find(Quote.class, id);
 
-        return entity_ToGet;
+        return quoteToGet;
 
     }
 
-    public List<ENTITY_> getENTITY_s() {
-        List<ENTITY_> entity_s = null;
+    public List<Quote> getQuotes() {
+        List<Quote> quotes = null;
         EntityManager em = getEntityManager();
         try {
 
             // Use the entity manager  
             Query query
-                    = em.createQuery("Select x FROM ENTITY_ x");
-            entity_s = query.getResultList();
+                    = em.createQuery("Select x FROM Quote x");
+            quotes = query.getResultList();
 
         } finally {
             em.close();
         }
-        return entity_s;
+        return quotes;
     }
 
-    public ENTITY_ editENTITY_(ENTITY_ x) {
+    public Quote editQuote(Quote x) {
         EntityManager em = getEntityManager();
-        ENTITY_ entity_ToEdit = em.find(ENTITY_.class, x.getId());
+        Quote quoteToEdit = em.find(Quote.class, x.getId());
 
         try {
 
             em.getTransaction().begin();
 
             ///// MUST EDIT THESE! 
-            entity_ToEdit.setEntityAttrib1(x.getEntityAttrib1());
-            entity_ToEdit.setEntityAttrib2(x.getEntityAttrib2());
+            quoteToEdit.setEntityAttrib1(x.getEntityAttrib1());
+            quoteToEdit.setEntityAttrib2(x.getEntityAttrib2());
             // ...
-            entity_ToEdit.setEntityAttribN(x.getEntityAttribN());
+            quoteToEdit.setEntityAttribN(x.getEntityAttribN());
 	    ///// MUST EDIT THESE!
 
             // and persist 
-            em.persist(entity_ToEdit);
+            em.persist(quoteToEdit);
             em.getTransaction().commit();
 
         } finally {
             em.close();
         }
 
-        return entity_ToEdit;
+        return quoteToEdit;
 
     }
 

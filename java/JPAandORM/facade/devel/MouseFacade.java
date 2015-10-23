@@ -5,13 +5,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-import entities.ENTITY_;
-
-public class ENTITY_Facade {
+public class PersonFacade {
 
     private EntityManagerFactory emf;
 
-    public ENTITY_Facade(EntityManagerFactory emf) {
+    public PersonFacade(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
@@ -19,7 +17,7 @@ public class ENTITY_Facade {
         return emf.createEntityManager();
     }
 
-    public ENTITY_ addENTITY_(ENTITY_ x) {
+    public Person addPerson(Person x) {
         EntityManager em = getEntityManager();
 
         try {
@@ -32,10 +30,10 @@ public class ENTITY_Facade {
         return x;
     }
 
-    public ENTITY_ deleteENTITY_(int id) {
+    public Person deletePerson(int id) {
         EntityManager em = getEntityManager();
 
-        ENTITY_ entity_ToDelete = em.find(ENTITY_.class, id);
+        Person entity_ToDelete = em.find(Person.class, id);
 
         // Use the entity manager  
         try {
@@ -48,24 +46,24 @@ public class ENTITY_Facade {
         return entity_ToDelete;
     }
 
-    public ENTITY_ getENTITY_(int id) {
+    public Person getPerson(int id) {
 
 	EntityManager em = getEntityManager();
 
-        ENTITY_ entity_ToGet = em.find(ENTITY_.class, id);
+        Person entity_ToGet = em.find(Person.class, id);
 
         return entity_ToGet;
 
     }
 
-    public List<ENTITY_> getENTITY_s() {
-        List<ENTITY_> entity_s = null;
+    public List<Person> getPersons() {
+        List<Person> entity_s = null;
         EntityManager em = getEntityManager();
         try {
 
             // Use the entity manager  
             Query query
-                    = em.createQuery("Select x FROM ENTITY_ x");
+                    = em.createQuery("Select x FROM Person x");
             entity_s = query.getResultList();
 
         } finally {
@@ -74,20 +72,19 @@ public class ENTITY_Facade {
         return entity_s;
     }
 
-    public ENTITY_ editENTITY_(ENTITY_ x) {
+    public Person editPerson(Person x) {
         EntityManager em = getEntityManager();
-        ENTITY_ entity_ToEdit = em.find(ENTITY_.class, x.getId());
+        Person entity_ToEdit = em.find(Person.class, x.getId());
 
         try {
 
             em.getTransaction().begin();
 
-            ///// MUST EDIT THESE! 
+            // overwrite ALL attributes in the object we want to edit
             entity_ToEdit.setEntityAttrib1(x.getEntityAttrib1());
             entity_ToEdit.setEntityAttrib2(x.getEntityAttrib2());
             // ...
             entity_ToEdit.setEntityAttribN(x.getEntityAttribN());
-	    ///// MUST EDIT THESE!
 
             // and persist 
             em.persist(entity_ToEdit);

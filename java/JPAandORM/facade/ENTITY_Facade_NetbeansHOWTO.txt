@@ -4,6 +4,26 @@ Facade how to:
 3. open ENTITY_Facade in a text editor and copy all content (ctrl + a)
 4. Netbeans: paste (ctrl + v) the content into PersonFacade.java
 5. Netbeans: press ctrl + h (replace) and replace all 'ENTITY_' with 'Person' and AGAIN replace all 'entity_' with 'person'
-6. Netbeans: go to line 84 to 87 and REMEMBER to ADJUST the ATTRIBUTES that should be copied according to YOUR entity class
+6. Netbeans: go to line 86 to 89 and REMEMBER to ADJUST the ATTRIBUTES that should be copied according to YOUR entity class
 
-You should now have a working simple CRUD Facade 
+
+		---------------- OR -------------------
+
+			Use the script (located in this this folder named generate.sh ) :
+
+		1. In linux bash: write(without quotes): 'chmod +x generate.sh' to make the script executable if it is not 
+		2. Then write in bash: './generate.sh Person' <---- this will create the file scriptResults/PersonFacade.java
+		3. Netbeans: Copy this file into the package facades.
+
+
+You should now have a working simple CRUD Facade which can access your database through persistence.xml
+
+Usage of Facade:
+
+Facade f = new Facade(Persistence.createEntityManagerFactory("INSERT_YOUR_PERSISTENCE_UNIT_NAME_HERE"));
+f.get....(); 
+....
+
+
+
+

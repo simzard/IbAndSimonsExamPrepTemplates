@@ -5,13 +5,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-import entities.ENTITY_;
+import entities.Bob;
 
-public class ENTITY_Facade {
+public class BobFacade {
 
     private EntityManagerFactory emf;
 
-    public ENTITY_Facade(EntityManagerFactory emf) {
+    public BobFacade(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
@@ -19,7 +19,7 @@ public class ENTITY_Facade {
         return emf.createEntityManager();
     }
 
-    public ENTITY_ addENTITY_(ENTITY_ x) {
+    public Bob addBob(Bob x) {
         EntityManager em = getEntityManager();
 
         try {
@@ -32,72 +32,71 @@ public class ENTITY_Facade {
         return x;
     }
 
-    public ENTITY_ deleteENTITY_(int id) {
+    public Bob deleteBob(int id) {
         EntityManager em = getEntityManager();
 
-        ENTITY_ entity_ToDelete = em.find(ENTITY_.class, id);
+        Bob bobToDelete = em.find(Bob.class, id);
 
         // Use the entity manager  
         try {
             em.getTransaction().begin();
-            em.remove(entity_ToDelete);
+            em.remove(bobToDelete);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
-        return entity_ToDelete;
+        return bobToDelete;
     }
 
-    public ENTITY_ getENTITY_(int id) {
+    public Bob getBob(int id) {
 
 	EntityManager em = getEntityManager();
 
-        ENTITY_ entity_ToGet = em.find(ENTITY_.class, id);
+        Bob bobToGet = em.find(Bob.class, id);
 
-        return entity_ToGet;
+        return bobToGet;
 
     }
 
-    public List<ENTITY_> getENTITY_s() {
-        List<ENTITY_> entity_s = null;
+    public List<Bob> getBobs() {
+        List<Bob> bobs = null;
         EntityManager em = getEntityManager();
         try {
 
             // Use the entity manager  
             Query query
-                    = em.createQuery("Select x FROM ENTITY_ x");
-            entity_s = query.getResultList();
+                    = em.createQuery("Select x FROM Bob x");
+            bobs = query.getResultList();
 
         } finally {
             em.close();
         }
-        return entity_s;
+        return bobs;
     }
 
-    public ENTITY_ editENTITY_(ENTITY_ x) {
+    public Bob editBob(Bob x) {
         EntityManager em = getEntityManager();
-        ENTITY_ entity_ToEdit = em.find(ENTITY_.class, x.getId());
+        Bob bobToEdit = em.find(Bob.class, x.getId());
 
         try {
 
             em.getTransaction().begin();
 
-            ///// MUST EDIT THESE! 
-            entity_ToEdit.setEntityAttrib1(x.getEntityAttrib1());
-            entity_ToEdit.setEntityAttrib2(x.getEntityAttrib2());
+            // overwrite ALL attributes in the object we want to edit
+            bobToEdit.setEntityAttrib1(x.getEntityAttrib1());
+            bobToEdit.setEntityAttrib2(x.getEntityAttrib2());
             // ...
-            entity_ToEdit.setEntityAttribN(x.getEntityAttribN());
-	    ///// MUST EDIT THESE!
+            bobToEdit.setEntityAttribN(x.getEntityAttribN());
 
             // and persist 
-            em.persist(entity_ToEdit);
+            em.persist(bobToEdit);
             em.getTransaction().commit();
 
         } finally {
             em.close();
         }
 
-        return entity_ToEdit;
+        return bobToEdit;
 
     }
 
