@@ -120,7 +120,6 @@ do
 done
 t2="${t2}\ \ \ \ }\n"
 text=$t1$t2
-echo $text;
 sed -i "${k} i ${text}" $file
 
 #### Empty constructor
