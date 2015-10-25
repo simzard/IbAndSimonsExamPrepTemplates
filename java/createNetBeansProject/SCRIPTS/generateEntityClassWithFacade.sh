@@ -7,6 +7,7 @@
 ###
 
 
+
 GENERATE_FOLDER="SCRIPTS/TEMP_GENERATED_CLASSES"
 
 TEMPLATE_DIR="SCRIPTS/TEMPLATE_FILES"
@@ -149,6 +150,20 @@ do
 
 	sed "s/ENTITY_/$CLASSNAME/g" "$TEMPLATE_DIR/ENTITY_FACADE_TEMPLATE" > $facadeFile
 	sed -i "s/entity_/$lowercase/g" $facadeFile
+
+	
+	### insert the overwrite lines in edit method
+	for (( i=1; i<=$NUMBER; i++ ))
+	do
+		
+		attributeType=${attributeTypes[$i]}
+		attributeName=${attributeNames[$i]}
+		
+		theLine="\ \ \ \ \ \ \ \ \ \ \ \ ${lowercase}ToEdit.set${attributeName^}(x.get${attributeName^}());"
+		thePattern="copy and persist"
+		sed -i "/$thePattern/a ${theLine}" $facadeFile 
+
+	done
 	
 done
 	
