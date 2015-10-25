@@ -50,7 +50,7 @@ sed -i "s/$TEMPLATE_NAME/$PROJECT_NAME/g" "$NEW_PROJECT_DIR/nbproject/build-impl
 $SCRIPT_FOLDER/generateEntityClassWithFacade.sh
 
 mkdir $NEW_PROJECT_DIR/src/java
-mkdir $NEW_PROEJCT_DIR/web/WEB-INF
+mkdir $NEW_PROJECT_DIR/web/WEB-INF
 
 ### Temporary results are placed in generatedClasses - copy them - and delete them
 mkdir $NEW_PROJECT_DIR/src/java/entities
