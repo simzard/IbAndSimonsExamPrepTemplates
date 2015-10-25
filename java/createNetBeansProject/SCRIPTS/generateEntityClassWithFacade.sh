@@ -1,12 +1,13 @@
 #!/bin/bash
 
 ###
-### Script that creates an entity class and generates 3 constructors and all getters and setters
+### Script that creates an entity class and generates 3 constructors and all getters and setters 
+### including facades for the entity classes
 ### for quick use at our exam 
 ###
 
 
-GENERATE_FOLDER="SCRIPTS/GENERATED_CLASSES"
+GENERATE_FOLDER="SCRIPTS/TEMP_GENERATED_CLASSES"
 
 TEMPLATE_DIR="SCRIPTS/TEMPLATE_FILES"
 
@@ -53,7 +54,7 @@ do
 	
 	
 	file="$GENERATE_FOLDER/entities/$CLASSNAME.java"
-	echo "file: $file"
+	
 	## replace all CLASSNAME_ with the user provided class name
 	sed "s/CLASSNAME_/$CLASSNAME/g" "$TEMPLATE_DIR/CLASS_TEMPLATE" > $file
 	
@@ -143,11 +144,11 @@ do
 	done
 	
 
-#	facadeFile="generatedClasses/facades/${CLASSNAME}Facade.java"
-	
-#	lowercase=${CLASSNAME,,}
-#	sed "s/ENTITY_/$CLASSNAME/g" "$TEMPLATE_DIR/ENTITY_FACADE_TEMPLATE" > $facadeFile
-#	sed -i "s/entity_/$lowercase/g" $facadeFile
+	facadeFile="$GENERATE_FOLDER/facades/${CLASSNAME}Facade.java"
+	lowercase=${CLASSNAME,,}
+
+	sed "s/ENTITY_/$CLASSNAME/g" "$TEMPLATE_DIR/ENTITY_FACADE_TEMPLATE" > $facadeFile
+	sed -i "s/entity_/$lowercase/g" $facadeFile
 	
 done
 	

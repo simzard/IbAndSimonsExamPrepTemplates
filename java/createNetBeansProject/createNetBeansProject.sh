@@ -10,7 +10,7 @@ CREATE_FOLDER="createdNetbeansProjects/"
 TEMPLATE_NAME="TEMPLATE_JAVA_WEB_PROJECT"
 TEMPLATE_NAME_FOLDER="$SCRIPT_FOLDER/TEMPLATE_JAVA_WEB_PROJECT"
 
-GENERATED_CLASSES_FOLDER="$SCRIPT_FOLDER/GENERATED_CLASSES"
+GENERATED_CLASSES_FOLDER="$SCRIPT_FOLDER/TEMP_GENERATED_CLASSES"
 
 
 
@@ -50,11 +50,13 @@ sed -i "s/$TEMPLATE_NAME/$PROJECT_NAME/g" "$NEW_PROJECT_DIR/nbproject/build-impl
 $SCRIPT_FOLDER/generateEntityClassWithFacade.sh
 
 ### Temporary results are placed in generatedClasses - copy them - and delete them
+mkdir $NEW_PROJECT_DIR/src/java/entities
 cp $GENERATED_CLASSES_FOLDER/entities/*.java $NEW_PROJECT_DIR/src/java/entities
 rm $GENERATED_CLASSES_FOLDER/entities/*.java
 
-#cp $GENERATED_CLASSES_FOLDER/facades/*.java $NEW_PROJECT_DIR/src/java/facades
-#rm $GENERATED_CLASSES_FOLDER/facades/*.java
+mkdir $NEW_PROJECT_DIR/src/java/facades
+cp $GENERATED_CLASSES_FOLDER/facades/*.java $NEW_PROJECT_DIR/src/java/facades
+rm $GENERATED_CLASSES_FOLDER/facades/*.java
 
 
 echo ...
