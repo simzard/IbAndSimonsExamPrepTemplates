@@ -84,6 +84,7 @@ public class ENTITY_Facade {
 
             // copy and persist
             em.persist(entity_ToEdit);
+
             em.getTransaction().commit();
 
         } finally {

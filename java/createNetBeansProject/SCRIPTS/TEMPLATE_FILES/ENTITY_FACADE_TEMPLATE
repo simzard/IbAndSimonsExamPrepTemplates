@@ -19,7 +19,7 @@ public class ENTITY_Facade {
         return emf.createEntityManager();
     }
 
-    public ENTITY_ addENTITY_(ENTITY_ x) {
+    public ENTITY_ createENTITY_(ENTITY_ x) {
         EntityManager em = getEntityManager();
 
         try {
