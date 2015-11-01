@@ -14,6 +14,7 @@ TEMPLATE_NAME_FOLDER="$SCRIPT_FOLDER/TEMPLATE_JAVA_WEB_PROJECT"
 
 GENERATED_CLASSES_FOLDER="$SCRIPT_FOLDER/TEMP_GENERATED_CLASSES"
 
+TEMPLATE_FILES_FOLDER="${SCRIPT_FOLDER}/TEMPLATE_FILES"
 
 
 PROJECT_NAME=$1
@@ -73,6 +74,8 @@ mkdir -p $NEW_PROJECT_DIR/web/WEB-INF
 
 cp SCRIPTS/TEMPLATE_FILES/TESTER_TEMPLATE "$NEW_PROJECT_DIR/src/java/test/Tester.java"
 
+cp "$TEMPLATE_FILES_FOLDER/GENERATOR_TEMPLATE" "$GENERATED_CLASSES_FOLDER/generators/Generator.java"
+
 ### Now generate entity classes with facades 
 $SCRIPT_FOLDER/generateEntityClassWithFacadeAndPersistence.sh "$NEW_PROJECT_DIR"
 
@@ -86,6 +89,9 @@ mkdir $NEW_PROJECT_DIR/src/java/facades
 cp $GENERATED_CLASSES_FOLDER/facades/*.java $NEW_PROJECT_DIR/src/java/facades
 rm $GENERATED_CLASSES_FOLDER/facades/*.java
 
+mkdir $NEW_PROJECT_DIR/src/java/generators
+cp $GENERATED_CLASSES_FOLDER/generators/*.java $NEW_PROJECT_DIR/src/java/generators
+rm $GENERATED_CLASSES_FOLDER/generators/*.java
 
 echo ...
 echo ...

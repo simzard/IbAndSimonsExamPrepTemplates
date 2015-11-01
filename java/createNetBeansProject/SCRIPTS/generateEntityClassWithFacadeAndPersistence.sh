@@ -191,6 +191,45 @@ do
 	pattern="test() {"
 	sed -i "/$pattern/a ${FACTORY_LINE}" "$NEW_PROJECT_DIR/src/java/test/Tester.java"
 	
+	### generator
+	
+	pattern="Persistence;"
+	IMPORT_ENTITY="import entities.${CLASSNAME};"
+	IMPORT_FACADE="import facades.${CLASSNAME}Facade;"
+	import="${IMPORT_ENTITY}\\n${IMPORT_FACADE}"
+	sed -i "/$pattern/a ${import}" "$GENERATE_FOLDER/generators/Generator.java"
+
+	pattern="RandomString();"
+	sp="\ \ \ \ \ \ \ \ "
+	# PersonFacade personFacade = new PersonFacade(Persistence.createEntityManagerFactory...
+	FACTORY_LINE="${TYPE_NAME} ${CLASSNAME,,}Facade = new ${TYPE_NAME}(Persistence.createEntityManagerFactory(\"${PROJECT_NAME}PU\"));"
+	facade="${sp}${FACTORY_LINE}"
+	sed -i "/$pattern/a ${facade}" "$GENERATE_FOLDER/generators/Generator.java"
+
+	sp="\ \ \ \ \ \ \ \ \ \ \ \ "
+	lower="${CLASSNAME,,}"
+	#Person person = new Person(...);
+	theLine="${sp}${CLASSNAME} ${lower} = new ${CLASSNAME}("
+	
+	for (( i=1; i<=$NUMBER; i++ ))
+	do
+		
+		attributeType=${attributeTypes[$i]}
+		attributeName=${attributeNames[$i]}
+		
+		theLine="${theLine}\"${attributeName}_\"+rs.nextString(), "
+		
+	done	
+	
+	# now theLine contains a ', ' too much remove it
+	theLine=${theLine::-2}
+	theLine="${theLine});"
+	
+	the2ndLine="${sp}${lower}Facade.create${CLASSNAME}(${lower});"
+	both="$theLine\\n${the2ndLine}"
+	thePattern="i++) {"
+	sed -i "/$thePattern/a ${both}" "$GENERATE_FOLDER/generators/Generator.java"
+	
 
 
 done
